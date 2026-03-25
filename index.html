@@ -19,17 +19,15 @@
       <p class="text-gray-500 text-sm mt-1">We value your opinion 🙏</p>
     </div>
 
-    <!-- ✅ Netlify Form -->
+    <!-- Netlify Form -->
     <form name="review" method="POST" data-netlify="true" class="space-y-4">
       <input type="hidden" name="form-name" value="review">
-      <input type="hidden" name="redirect" value="thank-you.html">
+      <input type="hidden" name="redirect" value="/thank-you.html">
       <input type="text" name="bot-field" hidden>
 
-      <!-- Name -->
       <input type="text" name="name" placeholder="Your name (optional)"
         class="w-full p-3 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-      <!-- Rating -->
       <select name="rating" required
         class="w-full p-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-blue-500">
         <option value="">⭐ Select rating</option>
@@ -40,11 +38,9 @@
         <option>1 - Bad</option>
       </select>
 
-      <!-- Message -->
       <textarea name="message" placeholder="Write your review..." required
         class="w-full p-3 text-sm sm:text-base border rounded-lg h-28 sm:h-32 focus:ring-2 focus:ring-blue-500"></textarea>
 
-      <!-- Submit -->
       <button type="submit"
         class="w-full bg-blue-600 text-white p-3 text-sm sm:text-base rounded-lg hover:bg-blue-700 transition active:scale-95">
         Submit Review
