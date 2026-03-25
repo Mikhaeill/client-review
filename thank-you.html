@@ -3,15 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You</title>
+  <title>Leave a Review</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen px-4">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
 
-  <div class="bg-white p-8 rounded-2xl shadow-xl text-center max-w-md w-full">
-    <h1 class="text-2xl font-bold text-green-600 mb-4">✅ Thank You!</h1>
-    <p class="text-gray-600">Your feedback has been submitted successfully 🙏</p>
+  <div class="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-md">
+
+    <!-- Logo + Title -->
+    <div class="text-center mb-6">
+      <div class="flex justify-center mb-3">
+        <img src="logo.svg" alt="Company Logo" class="h-12 sm:h-16 object-contain drop-shadow-sm">
+      </div>
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-800">💬 Your Feedback</h2>
+      <p class="text-gray-500 text-sm mt-1">We value your opinion 🙏</p>
+    </div>
+
+    <!-- Netlify Form -->
+    <form name="review" method="POST" data-netlify="true" action="/thank-you.html" class="space-y-4">
+      
+      <!-- Hidden fields required by Netlify -->
+      <input type="hidden" name="form-name" value="review">
+      <input type="text" name="bot-field" hidden>
+
+      <input type="text" name="name" placeholder="Your name (optional)"
+        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+
+      <select name="rating" required
+        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+        <option value="">⭐ Select rating</option>
+        <option>5 - Excellent</option>
+        <option>4 - Good</option>
+        <option>3 - Average</option>
+        <option>2 - Poor</option>
+        <option>1 - Bad</option>
+      </select>
+
+      <textarea name="message" placeholder="Write your review..." required
+        class="w-full p-3 border rounded-lg h-28 sm:h-32 focus:ring-2 focus:ring-blue-500"></textarea>
+
+      <button type="submit"
+        class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
+        Submit Review
+      </button>
+
+    </form>
+
   </div>
-
 </body>
 </html>
