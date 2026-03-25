@@ -8,14 +8,6 @@
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
 
-  <!-- 🔥 FORCE Netlify to include thank-you page -->
-  <a href="/thank-you.html" style="display:none;">hidden</a>
-
-  <!-- 🔥 Hidden form for Netlify detection -->
-  <form name="review" data-netlify="true" hidden>
-    <input type="text" name="name">
-  </form>
-
   <div class="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-md">
 
     <!-- Logo + Title -->
@@ -27,11 +19,11 @@
       <p class="text-gray-500 text-sm mt-1">We value your opinion 🙏</p>
     </div>
 
-    <!-- ✅ Netlify Form -->
-    <form name="review" method="POST" data-netlify="true" class="space-y-4">
+    <!-- Netlify Form -->
+    <form name="review" method="POST" data-netlify="true" action="/thank-you.html" class="space-y-4">
       
+      <!-- Hidden fields required by Netlify -->
       <input type="hidden" name="form-name" value="review">
-      <input type="hidden" name="redirect" value="/thank-you.html">
       <input type="text" name="bot-field" hidden>
 
       <input type="text" name="name" placeholder="Your name (optional)"
@@ -48,7 +40,7 @@
       </select>
 
       <textarea name="message" placeholder="Write your review..." required
-        class="w-full p-3 border rounded-lg h-28 focus:ring-2 focus:ring-blue-500"></textarea>
+        class="w-full p-3 border rounded-lg h-28 sm:h-32 focus:ring-2 focus:ring-blue-500"></textarea>
 
       <button type="submit"
         class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
