@@ -25,10 +25,10 @@
       <input type="text" name="bot-field" hidden>
 
       <input type="text" name="name" placeholder="Your name (optional)"
-        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+        class="w-full p-3 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
 
       <select name="rating" required
-        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+        class="w-full p-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-blue-500">
         <option value="">⭐ Select rating</option>
         <option>5 - Excellent</option>
         <option>4 - Good</option>
@@ -38,10 +38,10 @@
       </select>
 
       <textarea name="message" placeholder="Write your review..." required
-        class="w-full p-3 border rounded-lg h-28 sm:h-32 focus:ring-2 focus:ring-blue-500"></textarea>
+        class="w-full p-3 text-sm sm:text-base border rounded-lg h-28 sm:h-32 focus:ring-2 focus:ring-blue-500"></textarea>
 
       <button type="submit"
-        class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
+        class="w-full bg-blue-600 text-white p-3 text-sm sm:text-base rounded-lg hover:bg-blue-700 transition active:scale-95">
         Submit Review
       </button>
     </form>
@@ -55,24 +55,31 @@
   </div>
 
   <script>
-    // Handle form submit
+    // Submit form using Netlify-compatible fetch
     const form = document.getElementById('reviewForm');
     form.addEventListener('submit', function(event) {
-      event.preventDefault(); // prevent default redirect
+      event.preventDefault(); // prevent default page reload
       const data = new FormData(form);
 
-      // Send via Netlify fetch
-      fetch('/', {
-        method: 'POST',
-        body: data,
+      // Convert FormData to URL-encoded string for Netlify
+      const encode = (data) => {
+        return [...data.entries()]
+          .map(([key, value]) => encodeURIComponent(key) + "=" + encodeURIComponent(value))
+          .join("&");
+      };
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode(data),
       }).then(() => {
-        // Hide form and show thank-you
-        form.style.display = 'none';
-        document.getElementById('thankYouMessage').classList.remove('hidden');
+        form.style.display = "none"; // hide the form
+        document.getElementById("thankYouMessage").classList.remove("hidden"); // show thank-you
       }).catch((error) => {
-        alert('Form submission failed! ' + error);
+        alert("Form submission failed: " + error);
       });
     });
   </script>
+
 </body>
 </html>
