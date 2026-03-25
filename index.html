@@ -2,70 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <!-- ✅ Mobile responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Leave a Review</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
 
   <div class="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-md">
 
-    <!-- ✅ Logo + Title -->
+    <!-- Logo + Title -->
     <div class="text-center mb-6">
-
-      <!-- Logo -->
       <div class="flex justify-center mb-3">
-        <img 
-          src="logo.svg" 
-          alt="Company Logo"
-          class="h-12 sm:h-16 object-contain drop-shadow-sm"
-        >
+        <img src="logo.png" alt="Company Logo" class="h-12 sm:h-16 object-contain drop-shadow-sm">
       </div>
-
-      <!-- Title -->
-      <h2 class="text-xl sm:text-2xl font-bold text-gray-800">
-        💬 Your Feedback
-      </h2>
-
-      <p class="text-gray-500 text-sm mt-1">
-        We value your opinion 🙏
-      </p>
-
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-800">💬 Your Feedback</h2>
+      <p class="text-gray-500 text-sm mt-1">We value your opinion 🙏</p>
     </div>
 
     <!-- ✅ Netlify Form -->
-    <form 
-      name="review" 
-      method="POST" 
-      data-netlify="true" 
-      action="thank-you.html"
-      class="space-y-4"
-    >
-
-      <!-- required hidden input -->
+    <form name="review" method="POST" data-netlify="true" class="space-y-4">
       <input type="hidden" name="form-name" value="review">
-
-      <!-- anti-bot -->
+      <input type="hidden" name="redirect" value="thank-you.html">
       <input type="text" name="bot-field" hidden>
 
       <!-- Name -->
-      <input 
-        type="text" 
-        name="name" 
-        placeholder="Your name (optional)"
-        class="w-full p-3 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
+      <input type="text" name="name" placeholder="Your name (optional)"
+        class="w-full p-3 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
 
       <!-- Rating -->
-      <select 
-        name="rating"
-        
-        class="w-full p-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-blue-500"
-      >
+      <select name="rating" required
+        class="w-full p-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-blue-500">
         <option value="">⭐ Select rating</option>
         <option>5 - Excellent</option>
         <option>4 - Good</option>
@@ -75,23 +41,16 @@
       </select>
 
       <!-- Message -->
-      <textarea 
-        name="message"
-        placeholder="Write your review..."
-        required
-        class="w-full p-3 text-sm sm:text-base border rounded-lg h-28 sm:h-32 focus:ring-2 focus:ring-blue-500"
-      ></textarea>
+      <textarea name="message" placeholder="Write your review..." required
+        class="w-full p-3 text-sm sm:text-base border rounded-lg h-28 sm:h-32 focus:ring-2 focus:ring-blue-500"></textarea>
 
       <!-- Submit -->
-      <button 
-        class="w-full bg-blue-600 text-white p-3 text-sm sm:text-base rounded-lg hover:bg-blue-700 transition active:scale-95"
-      >
+      <button type="submit"
+        class="w-full bg-blue-600 text-white p-3 text-sm sm:text-base rounded-lg hover:bg-blue-700 transition active:scale-95">
         Submit Review
       </button>
-
     </form>
 
   </div>
-
 </body>
 </html>
