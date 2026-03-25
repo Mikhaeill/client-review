@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leave a Review</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .hidden { display: none; }
-  </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
 
   <div class="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-md">
 
+    <!-- Logo + Title -->
     <div class="text-center mb-6">
       <div class="flex justify-center mb-3">
         <img src="logo.svg" alt="Company Logo" class="h-12 sm:h-16 object-contain drop-shadow-sm">
@@ -21,17 +19,16 @@
       <p class="text-gray-500 text-sm mt-1">We value your opinion 🙏</p>
     </div>
 
-    <form id="review-form" name="review" data-netlify="true" class="space-y-4">
+    <!-- Netlify Form -->
+    <form name="review" method="POST" data-netlify="true" id="reviewForm" class="space-y-4">
       <input type="hidden" name="form-name" value="review">
-      <p class="hidden">
-        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-      </p>
+      <input type="text" name="bot-field" hidden>
 
       <input type="text" name="name" placeholder="Your name (optional)"
-        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
 
       <select name="rating" required
-        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
         <option value="">⭐ Select rating</option>
         <option>5 - Excellent</option>
         <option>4 - Good</option>
@@ -41,55 +38,39 @@
       </select>
 
       <textarea name="message" placeholder="Write your review..." required
-        class="w-full p-3 border rounded-lg h-28 sm:h-32 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+        class="w-full p-3 border rounded-lg h-28 sm:h-32 focus:ring-2 focus:ring-blue-500"></textarea>
 
-      <button type="submit" id="submit-btn"
-        class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+      <button type="submit"
+        class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
         Submit Review
       </button>
     </form>
 
-    <div id="success-message" class="hidden text-center py-8">
-      <div class="text-5xl mb-4">✅</div>
-      <h2 class="text-2xl font-bold text-gray-800 mb-2">Thank You!</h2>
-      <p class="text-gray-500 mb-6">Your review has been submitted successfully.</p>
-      <button onclick="location.reload()" class="text-blue-600 font-medium hover:underline">
-        Submit another review
-      </button>
+    <!-- Inline thank you message (hidden by default) -->
+    <div id="thankYouMessage" class="hidden text-center mt-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Thank You! 🙏</h2>
+      <p class="text-gray-500">Your review has been submitted successfully.</p>
     </div>
 
   </div>
 
   <script>
-    const form = document.getElementById('review-form');
-    const successMsg = document.getElementById('success-message');
-    const submitBtn = document.getElementById('submit-btn');
+    // Handle form submit
+    const form = document.getElementById('reviewForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // prevent default redirect
+      const data = new FormData(form);
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      
-      submitBtn.disabled = true;
-      submitBtn.innerText = "Sending...";
-
-      const formData = new FormData(form);
-      
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
-      })
-      .then((response) => {
-        if (response.ok) {
-          form.classList.add('hidden');
-          successMsg.classList.remove('hidden');
-        } else {
-          throw new Error('Network response was not ok');
-        }
-      })
-      .catch((error) => {
-        alert("Submission failed. Please try again.");
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Submit Review";
+      // Send via Netlify fetch
+      fetch('/', {
+        method: 'POST',
+        body: data,
+      }).then(() => {
+        // Hide form and show thank-you
+        form.style.display = 'none';
+        document.getElementById('thankYouMessage').classList.remove('hidden');
+      }).catch((error) => {
+        alert('Form submission failed! ' + error);
       });
     });
   </script>
